@@ -1,1 +1,0 @@
-import{_ as e}from"./PhoneInput.vue_vue_type_script_setup_true_lang.xtGVtn1F.js";import{d as o,e as n,f as r,u as t}from"./framework.DQPMma1w.js";import"./theme.BzOE1UeN.js";const u=o({__name:"PhoneInputIntDemo",setup(a){return(c,s)=>(n(),r(t(e),{countryLocale:"ru-RU"}))}});export{u as default};
