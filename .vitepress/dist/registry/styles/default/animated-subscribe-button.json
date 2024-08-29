@@ -1,0 +1,16 @@
+{
+  "name": "animated-subscribe-button",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "AnimatedSubscribeButton.vue",
+      "content": "<template>\n    <button\n        ref=\"buttonRef\"\n        class=\"relative flex w-[200px] cursor-pointer items-center justify-center rounded-md border-none p-[10px]\"\n        :style=\"{ backgroundColor: buttonColor, color: buttonTextColor }\"\n        @click=\"toggleSubscription\">\n        <span class=\"relative flex font-semibold\">\n            <slot\n                name=\"subscribed\"\n                v-if=\"!isSubscribed\" />\n            <slot\n                name=\"unsubscribed\"\n                v-else />\n        </span>\n    </button>\n</template>\n\n<script setup lang=\"ts\">\nimport { ref, onMounted, watch } from 'vue'\nimport gsap from 'gsap'\n\ninterface AnimatedSubscribeButtonProps {\n    buttonColor: string\n    buttonTextColor?: string\n    subscribeStatus: boolean\n}\n\nconst props = defineProps<AnimatedSubscribeButtonProps>()\n\nconst isSubscribed = ref<boolean>(props.subscribeStatus)\nconst buttonRef = ref<HTMLElement | null>(null)\n\nconst toggleSubscription = () => {\n    isSubscribed.value = !isSubscribed.value\n}\n\nconst handleAnimations = () => {\n    if (buttonRef.value) {\n        gsap.to(buttonRef.value, {\n            backgroundColor: isSubscribed.value ? 'white' : props.buttonColor,\n            color: isSubscribed.value\n                ? props.buttonColor\n                : props.buttonTextColor,\n            duration: 0.5,\n            ease: 'sine',\n        })\n\n        gsap.fromTo(\n            buttonRef.value.querySelector('span'),\n            { y: isSubscribed.value ? 20 : 20, opacity: 0 },\n            { y: 0, opacity: 1, duration: 0.5, ease: 'sine' }\n        )\n    }\n}\n\nonMounted(() => {\n    handleAnimations()\n})\n\nwatch(isSubscribed, () => {\n    handleAnimations()\n})\n</script>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export {default as AnimatedSubscribeButton} from './AnimatedSubscribeButton.vue'"
+    }
+  ],
+  "type": "components:ui"
+}

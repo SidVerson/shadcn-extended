@@ -1,0 +1,18 @@
+{
+  "name": "marquee",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "name": "Marquee.vue",
+      "content": "<template>\n    <div\n        v-bind=\"props\"\n        :class=\"\n            cn(\n                'group/item flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]',\n                {\n                    'flex-row': !vertical,\n                    'flex-col': vertical,\n                },\n                className\n            )\n        \">\n        <div\n            v-for=\"n in repeat\"\n            :key=\"n\"\n            :class=\"\n                cn('flex shrink-0 justify-around [gap:var(--gap)]', {\n                    'animate-marquee flex-row': !vertical,\n                    'animate-marquee-vertical flex-col': vertical,\n                    'group-hover/item:[animation-play-state:paused]':\n                        pauseOnHover,\n                    '[animation-direction:reverse]': reverse,\n                })\n            \">\n            <slot />\n        </div>\n    </div>\n</template>\n\n<script setup lang=\"ts\">\nimport { defineProps } from 'vue'\nimport { cn } from '@/lib/utils'\n\ninterface MarqueeProps {\n    className?: string\n    reverse?: boolean\n    pauseOnHover?: boolean\n    vertical?: boolean\n    repeat?: number\n    [key: string]: any\n}\n\n// Define props using defineProps() from Vue's Composition API\nconst props = defineProps<MarqueeProps>()\n\n// Extract props for usage in template\nconst {\n    className = '',\n    reverse = false,\n    pauseOnHover = false,\n    vertical = false,\n    repeat = 4,\n    ...restProps\n} = props\n</script>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export {default as Marquee} from './Marquee.vue'"
+    }
+  ],
+  "type": "components:ui"
+}

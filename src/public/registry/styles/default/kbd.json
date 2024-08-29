@@ -1,0 +1,16 @@
+{
+  "name": "kbd",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "name": "Kbd.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from 'vue'\n\ninterface KbdProps {\n    as?: string\n    size?: 'xs' | 'sm' | 'md'\n}\n\nconst props = withDefaults(defineProps<KbdProps>(), {\n    as: 'kbd',\n    size: 'sm',\n})\n\nconst kbdClass = computed(() => {\n    const baseClass =\n        'inline-flex items-center pointer-events-none h-5 select-none gap-1 rounded-md border border-border bg-muted font-sans font-medium'\n\n    const sizeClasses = {\n        xs: 'min-h-4 text-[10px] h-4 px-1',\n        sm: 'min-h-5 text-[11px] h-5 px-1',\n        md: 'min-h-6 text-[12px] h-6 px-1.5',\n    }\n\n    return `${baseClass} ${sizeClasses[props.size || 'sm']}`\n})\n</script>\n\n<template>\n    <component\n        :is=\"props.as\"\n        :class=\"kbdClass\">\n        <slot />\n    </component>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as Kbd } from './Kbd.vue'\n"
+    }
+  ],
+  "type": "components:ui"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "phone-input",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "registryDependencies": [
+    "input",
+    "command",
+    "popover",
+    "button"
+  ],
+  "files": [
+    {
+      "name": "PhoneInput.vue",
+      "content": "<script lang=\"ts\" setup>\nimport PhoneInput from 'base-vue-phone-input'\nimport { useFocus } from '@vueuse/core'\nimport { ChevronsUpDown } from 'lucide-vue-next'\nimport { ref } from 'vue'\nimport { Input } from '@/lib/registry/default/ui/input'\nimport {\n    Command,\n    CommandEmpty,\n    CommandGroup,\n    CommandInput,\n    CommandItem,\n    CommandList,\n} from '@/lib/registry/default/ui/command'\nimport {\n    Popover,\n    PopoverContent,\n    PopoverTrigger,\n} from '@/lib/registry/default/ui/popover'\nimport { Button } from '@/lib/registry/default/ui/button'\nconst open = ref(false)\nconst phoneInput = ref(null)\nconst { focused } = useFocus(phoneInput)\n</script>\n\n<template>\n    <PhoneInput\n        noUseBrowserLocale\n        fetchCountry\n        class=\"flex\"\n        :ignored-countries=\"['AC']\">\n        <template #selector=\"{ inputValue, updateInputValue, countries }\">\n            <Popover v-model:open=\"open\">\n                <PopoverTrigger>\n                    <Button\n                        variant=\"outline\"\n                        class=\"flex gap-1 rounded-e-none rounded-s-lg px-3\">\n                        <span\n                            class=\"bg-foreground/20 flex h-4 w-6 overflow-hidden rounded-sm\">\n                            <img\n                                v-if=\"inputValue\"\n                                :src=\"`https://flagcdn.com/w40/${inputValue.toLowerCase()}.png`\" />\n                        </span>\n                        <ChevronsUpDown class=\"-mr-2 h-4 w-4 opacity-50\" />\n                    </Button>\n                </PopoverTrigger>\n                <PopoverContent class=\"w-[300px] p-0\">\n                    <Command>\n                        <CommandInput placeholder=\"Search country...\" />\n                        <CommandEmpty>No country found.</CommandEmpty>\n                        <CommandList>\n                            <CommandGroup>\n                                <CommandItem\n                                    v-for=\"option in countries\"\n                                    :key=\"option.iso2\"\n                                    :value=\"option.name\"\n                                    class=\"gap-2\"\n                                    @select=\"\n                                        () => {\n                                            updateInputValue(option.iso2)\n                                            open = false\n                                            focused = true\n                                        }\n                                    \">\n                                    <span\n                                        class=\"bg-foreground/20 flex h-4 w-6 overflow-hidden rounded-sm\">\n                                        <img\n                                            v-if=\"inputValue\"\n                                            :src=\"`https://flagcdn.com/w40/${option?.iso2.toLowerCase()}.png`\" />\n                                    </span>\n                                    <span class=\"flex-1 text-sm\">{{\n                                        option.name\n                                    }}</span>\n                                    <span class=\"text-foreground/50 text-sm\">{{\n                                        option.dialCode\n                                    }}</span>\n                                </CommandItem>\n                            </CommandGroup>\n                        </CommandList>\n                    </Command>\n                </PopoverContent>\n            </Popover>\n        </template>\n\n        <template #input=\"{ inputValue, updateInputValue, placeholder }\">\n            <Input\n                ref=\"phoneInput\"\n                class=\"rounded-e-lg rounded-s-none\"\n                type=\"text\"\n                :model-value=\"inputValue\"\n                @input=\"updateInputValue\"\n                :placeholder=\"placeholder\" />\n        </template>\n    </PhoneInput>\n</template>\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export { default as PhoneInput } from './PhoneInput.vue'"
+    }
+  ],
+  "type": "components:ui"
+}
