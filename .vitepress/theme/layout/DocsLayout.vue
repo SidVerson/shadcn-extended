@@ -11,8 +11,7 @@ import RadixIconsExternalLink from '~icons/radix-icons/external-link'
 const $route = useRoute()
 const { frontmatter } = useData()
 
-const sourceLink =
-    'https://github.com/SidVerson/shadcn-extended/src/content/docs/components/'
+const sourceLink = 'https://github.com/SidVerson/shadcn-extended/src/content/docs/components/'
 </script>
 
 <template>

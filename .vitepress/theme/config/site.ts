@@ -7,7 +7,7 @@ export const siteConfig = {
         twitter: 'https://twitter.com/huntabyte',
         github: 'https://github.com/huntabyte/shadcn-vue',
         shadTwitter: 'https://twitter.com/shadcn',
-        shadGithub: 'https://github.com/SidVerson/shadcn-extended.git',
+        shadGithub: 'https://github.com/SidVerson/shadcn-extended/',
     },
     keywords: 'shadcn,Vue,Nuxt,Vue Components,TailwindCSS,Radix Vue',
 }
