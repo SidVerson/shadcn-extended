@@ -61,7 +61,7 @@ export default defineConfig({
         },
         editLink: {
             pattern:
-                'https://github.com/SidVerson/shadcn-extended/src/content/docs/components/:path',
+                'https://github.com/SidVerson/shadcn-extended/tree/main/src/content/docs/components/:path',
             text: 'Edit this page on GitHub',
         },
     },
