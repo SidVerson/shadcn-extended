@@ -16,6 +16,7 @@ export default defineConfig({
     titleTemplate: ':title - shadcn extended',
     description: siteConfig.description,
     head: [
+        ['script', { src: '/_vercel/insights/script.js', defer: true }],
         ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
         ['link', { rel: 'shortcut icon', href: '/favicon-16x16.png' }],
         ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
